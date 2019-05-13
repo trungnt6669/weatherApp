@@ -1,5 +1,5 @@
 // REPLACE YOUR_API_ID with actual ID
-const id = 'a355f547eb7441f235496788801d3244';
+const id = 'YOUR_API_ID';
 
 export async function fetchWeather(query) {
   const api_call = await fetch(
