@@ -7,7 +7,7 @@ class Info extends React.Component {
   render() {
     return (
       <div className="weather">
-        {this.props.weatherData.main && (
+        {this.props.weatherData.main ? (
           <div>
             <div className="city-name">{this.props.weatherData.name}</div>
             <div className="temp">
@@ -20,6 +20,8 @@ class Info extends React.Component {
               Humidity: {this.props.weatherData.main.pressure} hpa
             </div>
           </div>
+        ) : (
+          <div>Invalid Input. Please Try Again</div>
         )}
       </div>
     );
