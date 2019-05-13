@@ -46,6 +46,7 @@ class Searchbar extends React.Component {
             lat: position.coords.latitude,
             lon: position.coords.longitude
           });
+          this.runSearch();
         },
         error => {
           console.log(error.message);
@@ -71,9 +72,14 @@ class Searchbar extends React.Component {
     });
   };
 
-  // Get query depending on the mode
+  // When Search button is clicked
   handleSearch = event => {
     event.preventDefault();
+    this.runSearch();
+  };
+
+  // Search with provided query
+  runSearch = () => {
     let query = '';
     let mode = this.state.searchMode;
     switch (mode) {
@@ -89,6 +95,7 @@ class Searchbar extends React.Component {
       default:
         console.log('Something went wrong...');
     }
+    this.props.getWeather(query);
   };
 
   render() {

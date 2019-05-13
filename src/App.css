@@ -17,7 +17,8 @@ li {
 }
 
 .search-mode,
-.search-form {
+.search-form,
+.weather {
   display: flex;
   justify-content: center;
 }
@@ -26,4 +27,8 @@ li {
   margin: 10px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.weather {
+  padding: 30px;
 }
