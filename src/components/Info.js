@@ -1,4 +1,6 @@
 import React from 'react';
+import { displayTemp } from '../utils/functions';
+import RecentSearches from './RecentSearches';
 
 class Info extends React.Component {
   constructor(props) {
@@ -8,19 +10,6 @@ class Info extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.displayTemp = this.displayTemp.bind(this);
-  }
-
-  // Display temperature in Fahrenheit or Celsius depending on the toggle
-  displayTemp() {
-    if (this.state.unitFormat === 'F') {
-      return this.props.weatherData.main.temp;
-    } else {
-      return (
-        (Number(this.props.weatherData.main.temp) - 32) *
-        (5 / 9)
-      ).toFixed(2);
-    }
   }
 
   handleClick() {
@@ -33,26 +22,37 @@ class Info extends React.Component {
 
   render() {
     return (
-      <div className="weather">
-        {this.props.weatherData.main ? (
-          <div>
-            <div className="city-name">{this.props.weatherData.name}</div>
-            <div className="temp">
-              Temperature: {this.displayTemp()} °{this.state.unitFormat}
+      <div>
+        <div className="weather">
+          {this.props.weatherData.main ? (
+            <div>
+              <div className="city-name">{this.props.weatherData.name}</div>
+              <div className="temp">
+                Temperature:{' '}
+                {displayTemp(
+                  this.state.unitFormat,
+                  this.props.weatherData.main.temp
+                )}{' '}
+                °{this.state.unitFormat}
+              </div>
+              <div className="humidity">
+                Humidity: {this.props.weatherData.main.humidity}%
+              </div>
+              <div className="pressure">
+                Humidity: {this.props.weatherData.main.pressure} hpa
+              </div>
             </div>
-            <div className="humidity">
-              Humidity: {this.props.weatherData.main.humidity}%
-            </div>
-            <div className="pressure">
-              Humidity: {this.props.weatherData.main.pressure} hpa
-            </div>
-          </div>
-        ) : (
-          <div>Invalid Input. Please Try Again</div>
-        )}
-        <button className="unit-toggle" onClick={this.handleClick}>
-          {this.state.unitFormat === 'F' ? 'Celsius' : 'Fahrenheit'}
-        </button>
+          ) : (
+            <div>Invalid Input. Please Try Again</div>
+          )}
+          <button className="unit-toggle" onClick={this.handleClick}>
+            {this.state.unitFormat === 'F' ? 'Celsius' : 'Fahrenheit'}
+          </button>
+        </div>
+        <RecentSearches
+          recentSearches={this.props.recentSearches}
+          unit={this.state.unitFormat}
+        />
       </div>
     );
   }
