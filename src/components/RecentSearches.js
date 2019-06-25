@@ -5,11 +5,11 @@ const RecentSearches = props => {
   return (
     <div>
       <h2>Most Recent Searches</h2>
-      {props.recentSearches.length > 1 ? (
+      {props.recentSearches.length >= 1 ? (
         <div className="recent-searches">
-          {props.recentSearches.map(query => {
+          {props.recentSearches.map((query, index) => {
             return (
-              <div className="search-item" key={query.name}>
+              <div className="search-item" key={index}>
                 <div className="city-name">{query.name}</div>
                 <div className="temp">
                   Temperature: {displayTemp(props.unit, query.main.temp)} °

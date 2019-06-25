@@ -20,10 +20,14 @@ class App extends React.Component {
 
   getWeatherData = async query => {
     const info = await fetchWeather(query);
-    this.setState({
-      weatherInfo: info,
-      mostRecent: pushMax(this.state.mostRecent, info, 3) // Save the 3 most recent searches
-    });
+    if (info.cod === 200) {
+      this.setState({
+        weatherInfo: info,
+        mostRecent: pushMax(this.state.mostRecent, info, 3) // Save the 3 most recent searches
+      });
+    } else {
+      this.setState({ weatherInfo: info });
+    }
   };
 
   render() {
