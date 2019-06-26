@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SelectSearchMode({ selectedMode, onSelect }) {
+const SelectSearchMode = ({ selectedMode, onSelect }) => {
   const modes = ['Coordinates', 'City Name', 'ZIP Code'];
   return (
     <ul className="search-mode">
